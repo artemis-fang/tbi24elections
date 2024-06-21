@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submitted Names</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="pagebg">
+    <div class="container">
+        <h1 class="head1">Submitted Names</h1>
+        <div id="names-list"> </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var savedNames=JSON.parse(localStorage.getItem("collectedNames"))||[];
+            var namesList=document.getElementById("names-list");
+            if(savedNames.length===0) {
+                namesList.innerHTML="<p>No names have been saved yet </p>";
+            }
+            else {
+                var list= "<ul>";
+                    savedNames.forEach(function(name) {
+                        list += "<li>" + name + "</li>";
+                    });
+                list+="</ul>";
+                namesList.innerHTML=list;
+            }
+        });
+    </script>
+</body>
+</html>

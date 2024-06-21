@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> home-Elections </title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="pagebg" >
+    <div class="container">
+        <h1 class="head1"> Election Results </h1>
+        <div id="results-list"></div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var voteCount=JSON.parse(localStorage.getItem("voteCount"))||{};
+            var resultsList=document.getElementById("results-list");
+
+            if(Object.keys(voteCount).length===0) {
+                resultsList.innerHTML="<p>No votes have been cast yet. </p>";
+            }
+            else {
+                var list="";
+                for(let category in voteCount) {
+                    list+=`<h3>${category}</h3><ul>`;
+                        for(let candidate in voteCount[category]) {
+                            list+=`<li>${candidate}: ${voteCount[category][candidate]} votes</li>`;
+                        }
+                list+=`</ul>`
+                    }
+            resultsList.innerHTML=list;
+            }
+        });
+    </script>
+</body>
+</html>

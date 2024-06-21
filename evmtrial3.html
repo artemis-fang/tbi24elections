@@ -1,16 +1,49 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, inital-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> votepage-Elections </title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="pagebg" >
-    <h1 class="head1"> Elections 2024 </h1>
-    <button class="vote-button">
-        Vote
-    </button>
-    <button class="res-button">
-        Results
-    </button>
+     <div class="container">
+        <h2> ENTER  YOUR  ID </h2>
+        <form id="nameform">
+            <input type="text" id="nameinput" placeholder="Enter your ID">
+            <button type="submit" class="button2" >
+                Submit
+            </button>
+        </form>
+    </div>
+    <script>
+        document.getElementById("nameform").addEventListener("submit", function(event) 
+        {
+            event.preventDefault();
+            var nameInput=document.getElementById("nameinput");
+            var name=nameInput.value.trim();
+            if(name==="")
+            {
+                alert("Please enter your name to proceed.");
+                return;
+            }
+            var savedNames = JSON.parse(localStorage.getItem("collectedNames")) || [];
+            if (savedNames.includes(name))
+            {
+                alert("Name already submitted.");
+                return;
+            }
+            savedNames.push(name);
+            localStorage.setItem("collectedNames", JSON.stringify(savedNames));
+
+            nameInput.value="";
+            alert("Name stored successfully!");
+
+            window.location.href="candidates.html";
+        });
+    </script>
 </body>
 </html>
+
+
+
